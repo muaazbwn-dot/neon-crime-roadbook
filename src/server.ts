@@ -1,6 +1,7 @@
 import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
+import { canonicalRedirect } from "./lib/canonical-redirect";
 import { renderErrorPage } from "./lib/error-page";
 
 type ServerEntry = {
@@ -49,6 +50,11 @@ function isH3SwallowedErrorBody(body: string): boolean {
 // twice and renders garbled.
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    // One URL per page: 301 trailing-slash and double-slash variants to the canonical path.
+    if (request.method === "GET" || request.method === "HEAD") {
+      const target = canonicalRedirect(request.url);
+      if (target) return Response.redirect(target, 301);
+    }
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);

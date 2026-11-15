@@ -63,6 +63,8 @@ export interface ContentEntry {
   updatedOn: string;
   /** Platform + game version for "verified" records, e.g. "PS5 v1.02". */
   verifiedOn?: string;
+  /** Optional editorial ordering; lower comes first, then alphabetical. */
+  sortOrder?: number;
   /** Unpublished records are never listed, routed or put in the sitemap. */
   draft?: boolean;
   /**

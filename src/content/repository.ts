@@ -21,25 +21,35 @@ const DATA: Record<CollectionKey, ContentEntry[]> = {
   news,
 };
 
-/** Published (non-draft) records, sorted by name. Synchronous for route static data. */
+/** Published (non-draft) records, sorted by sortOrder then name. Synchronous for route static data. */
 export function publishedEntries(collection: CollectionKey): ContentEntry[] {
   return DATA[collection]
     .filter((entry) => !entry.draft)
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort(
+      (a, b) =>
+        (a.sortOrder ?? Number.MAX_SAFE_INTEGER) - (b.sortOrder ?? Number.MAX_SAFE_INTEGER) ||
+        a.name.localeCompare(b.name),
+    );
 }
 
 export function findPublishedEntry(collection: CollectionKey, slug: string): ContentEntry | null {
   return publishedEntries(collection).find((entry) => entry.slug === slug) ?? null;
 }
 
-/** A section hub is indexable only once it lists at least one published record. */
-export function isCollectionIndexable(collection: CollectionKey): boolean {
-  return publishedEntries(collection).length > 0;
+/** Whether a section is visible on the public website (see COLLECTIONS[...].launched). */
+export function isCollectionLaunched(collection: CollectionKey): boolean {
+  return COLLECTIONS[collection].launched;
 }
 
-/** A record page is indexable unless editors flagged it noindex or it has no own page. */
+/** A section hub is indexable only when launched and listing at least one published record. */
+export function isCollectionIndexable(collection: CollectionKey): boolean {
+  return isCollectionLaunched(collection) && publishedEntries(collection).length > 0;
+}
+
+/** A record page is indexable when its section is launched, it has its own page, and editors did not flag it noindex. */
 export function isEntryIndexable(entry: ContentEntry): boolean {
-  return COLLECTIONS[entry.collection].hasDetailPages && !entry.noindex && !entry.draft;
+  const config = COLLECTIONS[entry.collection];
+  return config.launched && config.detailPath !== undefined && !entry.noindex && !entry.draft;
 }
 
 export async function listEntries(collection: CollectionKey): Promise<ContentEntry[]> {
@@ -53,6 +63,7 @@ export async function getEntryWithRelated(
   const entry = findPublishedEntry(collection, slug);
   if (!entry) return null;
   const explicit = (entry.related ?? [])
+    .filter((ref) => isCollectionLaunched(ref.collection))
     .map((ref) => findPublishedEntry(ref.collection, ref.slug))
     .filter((e): e is ContentEntry => e !== null);
   // Fall back to siblings in the same section so every page links onward.

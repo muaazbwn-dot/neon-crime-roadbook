@@ -1,21 +1,20 @@
 import type { CollectionKey } from "./types";
 
-export type CollectionPath =
-  | "/vehicles"
-  | "/missions"
-  | "/locations"
-  | "/weapons"
-  | "/cheats"
-  | "/collectibles"
-  | "/characters"
-  | "/guides"
-  | "/news";
-
-export type DetailPath = "/vehicles/$slug" | "/missions/$slug" | "/locations/$slug" | "/weapons/$slug";
+/**
+ * Record-page routes that exist today. When a hidden section launches with its own
+ * record pages, add its "/section/$slug" route file and extend this union.
+ */
+export type DetailPath = "/vehicles/$slug";
 
 export interface CollectionConfig {
   key: CollectionKey;
-  path: CollectionPath;
+  /** Public URL of the section hub (used for canonical URLs and breadcrumbs). */
+  path: string;
+  /**
+   * Launch switch. Only launched sections get route files, navigation links and
+   * sitemap entries. Unlaunched sections keep their config and data for later.
+   */
+  launched: boolean;
   /** Route for individual records; set only for sections with their own record pages. */
   detailPath?: DetailPath;
   label: string;
@@ -33,6 +32,7 @@ export interface CollectionConfig {
 export const COLLECTIONS: Record<CollectionKey, CollectionConfig> = {
   vehicles: {
     key: "vehicles",
+    launched: true,
     path: "/vehicles",
     detailPath: "/vehicles/$slug",
     label: "Vehicles",
@@ -46,8 +46,8 @@ export const COLLECTIONS: Record<CollectionKey, CollectionConfig> = {
   },
   missions: {
     key: "missions",
+    launched: false,
     path: "/missions",
-    detailPath: "/missions/$slug",
     label: "Missions",
     singular: "Mission",
     title: "GTA 6 Missions – Story Mission List and Walkthroughs",
@@ -59,8 +59,8 @@ export const COLLECTIONS: Record<CollectionKey, CollectionConfig> = {
   },
   locations: {
     key: "locations",
+    launched: false,
     path: "/locations",
-    detailPath: "/locations/$slug",
     label: "Locations",
     singular: "Location",
     title: "GTA 6 Locations – Regions and Places in Leonida",
@@ -72,8 +72,8 @@ export const COLLECTIONS: Record<CollectionKey, CollectionConfig> = {
   },
   weapons: {
     key: "weapons",
+    launched: false,
     path: "/weapons",
-    detailPath: "/weapons/$slug",
     label: "Weapons",
     singular: "Weapon",
     title: "GTA 6 Weapons – Weapon List and Locations",
@@ -85,10 +85,11 @@ export const COLLECTIONS: Record<CollectionKey, CollectionConfig> = {
   },
   cheats: {
     key: "cheats",
+    launched: true,
     path: "/cheats",
-    label: "Cheats",
-    singular: "Cheat",
-    title: "GTA 6 Cheats – Verified Cheat Codes",
+    label: "Cheat Codes",
+    singular: "Cheat code",
+    title: "GTA 6 Cheat Codes – Tested Cheats List",
     description:
       "Grand Theft Auto VI cheat codes that have been tested in-game, with the platform and version each one was checked on.",
     intro:
@@ -97,6 +98,7 @@ export const COLLECTIONS: Record<CollectionKey, CollectionConfig> = {
   },
   collectibles: {
     key: "collectibles",
+    launched: false,
     path: "/collectibles",
     label: "Collectibles",
     singular: "Collectible",
@@ -109,6 +111,7 @@ export const COLLECTIONS: Record<CollectionKey, CollectionConfig> = {
   },
   characters: {
     key: "characters",
+    launched: true,
     path: "/characters",
     label: "Characters",
     singular: "Character",
@@ -121,6 +124,7 @@ export const COLLECTIONS: Record<CollectionKey, CollectionConfig> = {
   },
   guides: {
     key: "guides",
+    launched: false,
     path: "/guides",
     label: "Guides",
     singular: "Guide",
@@ -133,6 +137,7 @@ export const COLLECTIONS: Record<CollectionKey, CollectionConfig> = {
   },
   news: {
     key: "news",
+    launched: false,
     path: "/news",
     label: "News",
     singular: "News article",
@@ -143,6 +148,11 @@ export const COLLECTIONS: Record<CollectionKey, CollectionConfig> = {
     hasDetailPages: false,
   },
 };
+
+/** Sections currently visible on the public website. */
+export function launchedCollections(): CollectionConfig[] {
+  return COLLECTION_ORDER.map((key) => COLLECTIONS[key]).filter((c) => c.launched);
+}
 
 export const COLLECTION_ORDER: CollectionKey[] = [
   "vehicles",

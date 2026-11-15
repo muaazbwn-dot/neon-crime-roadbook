@@ -7,6 +7,7 @@ function person(
   name: string,
   officialPath: string,
   summary?: string,
+  sortOrder?: number,
 ): ContentEntry {
   return {
     collection: "characters",
@@ -19,6 +20,7 @@ function person(
     sources: [officialProfile(officialPath, name)],
     publishedOn: "2026-11-15",
     updatedOn: "2026-11-15",
+    sortOrder,
   };
 }
 
@@ -28,12 +30,14 @@ export const characters: ContentEntry[] = [
     "Jason Duval",
     "jason",
     "One of the two lead characters. His official profile says he grew up around grifters and crooks, served in the Army, and ended up in the Keys working for local drug runners.",
+    1,
   ),
   person(
     "lucia-caminos",
     "Lucia Caminos",
     "lucia",
     "One of the two lead characters, shown alongside Jason Duval in Rockstar Games' official trailers and on the official website.",
+    2,
   ),
   person("cal-hampton", "Cal Hampton", "cal"),
   person("boobie-ike", "Boobie Ike", "boobie"),
