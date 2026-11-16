@@ -30,7 +30,7 @@ describe("Page head", () => {
   it("adds noindex only when asked", () => {
     const indexed = buildHead({ title: "A", description: "d", path: "/a" });
     const hidden = buildHead({ title: "A", description: "d", path: "/a", noindex: true });
-    expect(indexed.meta.some((m) => m.name === "robots")).toBe(false);
+    expect(indexed.meta.some((m) => m["name"] === "robots")).toBe(false);
     expect(hidden.meta).toContainEqual({ name: "robots", content: "noindex, follow" });
   });
 });

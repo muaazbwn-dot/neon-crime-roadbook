@@ -20,7 +20,7 @@ function person(
     sources: [officialProfile(officialPath, name)],
     publishedOn: "2026-11-15",
     updatedOn: "2026-11-15",
-    sortOrder,
+    ...(sortOrder !== undefined ? { sortOrder } : {}),
   };
 }
 
