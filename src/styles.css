@@ -121,6 +121,19 @@
     transparent 100%
   );
   --grid-line: oklch(1 0 0 / 4%);
+
+  /* Interactive map marker categories. */
+  --map-cat-strip-clubs: var(--neon-pink);
+  --map-cat-vehicles: var(--neon-cyan);
+  --map-cat-safehouses: oklch(0.8 0.17 152);
+  --map-cat-missions: oklch(0.83 0.15 85);
+  --map-cat-restaurants: oklch(0.74 0.17 45);
+  --map-cat-shops: oklch(0.76 0.12 240);
+  --map-cat-collectibles: oklch(0.9 0.15 105);
+  --map-cat-weapons: oklch(0.65 0.21 25);
+  --map-cat-interesting: oklch(0.85 0.06 180);
+  --map-zone: var(--neon-cyan);
+  --map-zone-active: var(--neon-pink);
   --shadow-card: 0 1px 0 0 oklch(1 0 0 / 4%) inset, 0 20px 40px -24px oklch(0 0 0 / 70%);
   --shadow-glow-pink: 0 0 0 1px color-mix(in oklab, var(--neon-pink) 40%, transparent),
     0 10px 40px -12px color-mix(in oklab, var(--neon-pink) 45%, transparent);
@@ -289,4 +302,105 @@
   & li::marker {
     color: var(--neon-pink);
   }
+}
+
+/* ---------- Interactive map (Leaflet) ---------- */
+.gta-map {
+  background: var(--background);
+  font-family: var(--font-sans);
+  outline-offset: -2px;
+}
+.gta-map .leaflet-control-zoom {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.gta-map .leaflet-control-zoom a {
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  background: var(--surface);
+  color: var(--foreground);
+  border-bottom-color: var(--border);
+}
+.gta-map .leaflet-control-zoom a:hover {
+  background: var(--surface-raised);
+  color: var(--neon-cyan);
+}
+.gta-map .leaflet-control-zoom a.leaflet-disabled {
+  background: var(--muted);
+  color: var(--muted-foreground);
+  opacity: 0.5;
+}
+.gta-map .leaflet-control-attribution {
+  background: color-mix(in oklab, var(--background) 75%, transparent);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+}
+.gta-map .leaflet-popup-content-wrapper {
+  background: var(--popover);
+  color: var(--popover-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glow-cyan);
+  padding: 0;
+}
+.gta-map .leaflet-popup-content {
+  margin: 0;
+  width: 17rem !important;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.gta-map .leaflet-popup-tip {
+  background: var(--popover);
+  border: 1px solid var(--border);
+}
+.gta-map .leaflet-container a.leaflet-popup-close-button,
+.gta-map a.leaflet-popup-close-button {
+  color: var(--muted-foreground);
+  top: 0.4rem;
+  right: 0.4rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--background) 70%, transparent);
+  z-index: 2;
+}
+.gta-map a.leaflet-popup-close-button:hover {
+  color: var(--foreground);
+}
+
+.map-pin {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: var(--background);
+  border: 2px solid var(--pin);
+  color: var(--pin);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--pin) 18%, transparent), 0 6px 16px -6px oklch(0 0 0 / 80%);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.map-pin svg {
+  width: 17px;
+  height: 17px;
+}
+.leaflet-marker-icon:hover .map-pin,
+.leaflet-marker-icon:focus-visible .map-pin {
+  transform: scale(1.12);
+}
+.map-pin[data-selected="true"] {
+  background: var(--pin);
+  color: var(--background);
+  transform: scale(1.2);
+  box-shadow: 0 0 0 5px color-mix(in oklab, var(--pin) 30%, transparent), 0 8px 22px -6px var(--pin);
+}
+.leaflet-marker-icon.map-pin-wrapper {
+  background: transparent;
+  border: 0;
 }

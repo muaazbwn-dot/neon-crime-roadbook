@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3000" height="4000" viewBox="0 0 3000 4000">
+<title>Placeholder map – replace with an authorised GTA VI map image</title>
+<defs>
+<pattern id="minor" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M100 0H0V100" fill="none" stroke="#2a2f3a" stroke-width="2"/></pattern>
+<pattern id="major" width="500" height="500" patternUnits="userSpaceOnUse"><rect width="500" height="500" fill="url(#minor)"/><path d="M500 0H0V500" fill="none" stroke="#3b4252" stroke-width="4"/></pattern>
+<style>.l{font:600 28px ui-monospace,monospace;fill:#5b6478}.t{font:800 180px 'Arial Narrow',Arial,sans-serif;fill:#3b4252;letter-spacing:8px}.s{font:500 64px Arial,sans-serif;fill:#4c5568}</style>
+</defs>
+<rect width="3000" height="4000" fill="#151820"/>
+<rect width="3000" height="4000" fill="url(#major)"/>
+<rect x="6" y="6" width="2988" height="3988" fill="none" stroke="#3b4252" stroke-width="12" stroke-dasharray="40 24"/>
+<text x="12" y="40" class="l">x 0</text><text x="512" y="40" class="l">x 500</text><text x="1012" y="40" class="l">x 1000</text><text x="1512" y="40" class="l">x 1500</text><text x="2012" y="40" class="l">x 2000</text><text x="2512" y="40" class="l">x 2500</text><text x="3012" y="40" class="l">x 3000</text><text x="12" y="488" class="l">y 500</text><text x="12" y="988" class="l">y 1000</text><text x="12" y="1488" class="l">y 1500</text><text x="12" y="1988" class="l">y 2000</text><text x="12" y="2488" class="l">y 2500</text><text x="12" y="2988" class="l">y 3000</text><text x="12" y="3488" class="l">y 3500</text><text x="12" y="3988" class="l">y 4000</text>
+<g text-anchor="middle"><text x="1500" y="1940" class="t">PLACEHOLDER MAP</text>
+<text x="1500" y="2060" class="s">Replace with an authorised GTA VI map image</text>
+<text x="1500" y="2150" class="s">3000 × 4000 px · coordinates are image pixels</text></g>
+</svg>
