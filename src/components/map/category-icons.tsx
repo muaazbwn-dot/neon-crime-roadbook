@@ -54,7 +54,17 @@ export function MapStatusBadge({ status }: { status: MapLocation["status"] }) {
   return <StatusBadge status={status} />;
 }
 
-export function LocationImage({ location, className }: { location: MapLocation; className?: string }) {
+export function LocationImage({
+  location,
+  className,
+  compact = false,
+}: {
+  location: MapLocation;
+  className?: string;
+  /** Shorter frame for popups. */
+  compact?: boolean;
+}) {
+  const aspect = compact ? "aspect-[2/1]" : "aspect-video";
   if (location.image) {
     return (
       <figure className={className}>
@@ -65,7 +75,7 @@ export function LocationImage({ location, className }: { location: MapLocation; 
           height={location.image.height}
           loading="lazy"
           decoding="async"
-          className="aspect-video w-full rounded-md object-cover"
+          className={cn(aspect, "w-full rounded-md object-cover")}
         />
         {location.image.credit && (
           <figcaption className="mt-1 font-mono text-[0.65rem] text-muted-foreground">{location.image.credit}</figcaption>
@@ -76,7 +86,8 @@ export function LocationImage({ location, className }: { location: MapLocation; 
   return (
     <div
       className={cn(
-        "flex aspect-video w-full flex-col items-center justify-center gap-1.5 rounded-md border border-dashed border-border bg-muted text-muted-foreground",
+        aspect,
+        "flex w-full flex-col items-center justify-center gap-1.5 rounded-md border border-dashed border-border bg-muted text-muted-foreground",
         className,
       )}
     >

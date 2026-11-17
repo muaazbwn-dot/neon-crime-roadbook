@@ -305,7 +305,8 @@
 }
 
 /* ---------- Interactive map (Leaflet) ---------- */
-.gta-map {
+.gta-map,
+.gta-map.leaflet-container {
   background: var(--background);
   font-family: var(--font-sans);
   outline-offset: -2px;
@@ -352,6 +353,9 @@
   width: 17rem !important;
   font-size: 0.875rem;
   line-height: 1.5;
+}
+.gta-map .leaflet-popup-content p {
+  margin: 0;
 }
 .gta-map .leaflet-popup-tip {
   background: var(--popover);
@@ -403,4 +407,37 @@
 .leaflet-marker-icon.map-pin-wrapper {
   background: transparent;
   border: 0;
+}
+
+.gta-map path.map-zone {
+  stroke: var(--map-zone);
+  stroke-opacity: 0.45;
+  stroke-dasharray: 8 8;
+  fill: var(--map-zone);
+  fill-opacity: 0.02;
+  transition: stroke-opacity 200ms ease, fill-opacity 200ms ease;
+}
+.gta-map path.map-zone--active {
+  stroke: var(--map-zone-active);
+  stroke-opacity: 0.9;
+  stroke-dasharray: none;
+  fill: var(--map-zone-active);
+  fill-opacity: 0.06;
+}
+.gta-map path.map-zone--dim {
+  stroke-opacity: 0.15;
+}
+.gta-map .map-zone-label {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.gta-map .map-zone-label::before {
+  display: none;
 }

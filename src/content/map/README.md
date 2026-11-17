@@ -11,7 +11,7 @@ All map content lives in this folder; the map UI (`src/components/map/`) never n
 
 ## Coordinates
 Every position is a pixel on the original map image: `x` from the left edge, `y` from the top.
-Hover the map: the bottom-left readout shows the pixel under the cursor. Click the map to copy it.
+Hover the map: the bottom-left readout shows the pixel under the cursor. Alt/Option + click copies it.
 
 ## Adding a location
 Append one object to `MAP_LOCATIONS` with a unique id, category, zone, position, description,

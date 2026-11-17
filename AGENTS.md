@@ -39,3 +39,5 @@ use the editor.
 - Canonical URL redirects (trailing/double slashes → 301) happen in `src/server.ts` via `src/lib/canonical-redirect.ts`.
 - Dark-only design system in `src/styles.css`; status colours are reserved for the five verification labels.
 - No public accounts. A future admin/editor dashboard must live under an authenticated layout and write through server functions; public routes stay read-only.
+- Interactive map data lives only in `src/content/map/` (image config, categories, zones, locations) and is read via `getMapData()`; positions are pixels on the original image, converted by `geometry.ts`, so swapping the background image never touches UI code. `validateMapData` (tested) forbids non-placeholder markers while the placeholder image is active.
+- Leaflet is browser-only: `LeafletCanvas` is loaded with `React.lazy` behind `<ClientOnly>` and must never be imported statically from a route; popup content renders in its own React root because Leaflet stops click propagation.

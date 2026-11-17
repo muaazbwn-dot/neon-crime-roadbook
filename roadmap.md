@@ -7,11 +7,17 @@
 - [x] About, Contact, Privacy, Terms, Disclaimer, custom 404, sitemap, robots
 - [x] Tests for content rules, indexing and redirects
 
+## Interactive map
+- [x] Leaflet map with zoom/drag, multi-select category filters, regions, search, popups, details panel, placeholder data
+
 ## Waiting on the user
+- Authentic GTA VI map image (with permission) + its exact pixel size
+- Real, verified map locations and photos
 - Public domain (sitemap + absolute canonical URLs)
 - Contact email
 - Photos (user supplies; no generated images)
 
 ## Later (separate prompts)
-- Homepage design pass, vehicles database, interactive map, cheat codes, admin/editor dashboard
+- Homepage design pass, vehicles database, cheat codes, admin/editor dashboard
+- Map: trace real region outlines and enter verified locations once the authentic image arrives
 - Re-launch hidden sections: missions, weapons, collectibles, locations, guides, news
