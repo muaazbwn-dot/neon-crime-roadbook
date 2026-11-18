@@ -35,6 +35,70 @@ export interface EntryImage {
   credit?: string;
 }
 
+/* ---------- Section-specific details ---------- */
+
+export type VehicleCategory = "cars" | "motorcycles" | "boats" | "aircraft" | "other";
+
+/** How a vehicle appears at a spawn point. */
+export type SpawnType = "driving" | "parked" | "dealership" | "specific";
+
+export type Rarity = "common" | "rare" | "special";
+
+/** One place a vehicle can be found. Never add one without evidence. */
+export interface VehicleSpawn {
+  /** Unique within the vehicle, lowercase-hyphenated. */
+  id: string;
+  /** Location or area name, e.g. a district or landmark. */
+  area: string;
+  /** Step-by-step directions or what the source says about the spot. */
+  directions: string;
+  spawnType: SpawnType;
+  status: ContentStatus;
+  sources: Source[];
+  /** Platform + game version, required for "verified" spawns. */
+  verifiedOn?: string;
+  /** Only set once checked in-game (status "verified"). */
+  rarity?: Rarity;
+  /** Id of the marker in src/content/map/locations.ts once the authentic map is in. */
+  mapLocationId?: string;
+  screenshot?: EntryImage;
+}
+
+export interface VehicleDetails {
+  category: VehicleCategory;
+  /** Body style in plain words, e.g. "Classic sedan". */
+  type: string;
+  manufacturer?: string;
+  /** How players get it, when officially stated (e.g. an edition bonus). */
+  availability?: string;
+  spawns: VehicleSpawn[];
+}
+
+export type GuideCategory = "cheats" | "weapons" | "gameplay" | "beginner" | "vehicles" | "tips";
+
+export interface GuideSection {
+  heading: string;
+  paragraphs?: string[];
+  /** Bullet points; optional internal link per item. */
+  items?: Array<{ text: string; link?: EntryRef }>;
+  /** Marks information that is not available yet. */
+  comingSoon?: boolean;
+}
+
+export interface GuideDetails {
+  category: GuideCategory;
+  sections: GuideSection[];
+}
+
+export interface CharacterDetails {
+  /** Short role line, e.g. "Lead protagonist". */
+  role: string;
+  /** Biography paragraphs, written from the official profile. */
+  biography: string[];
+  /** Known background points, each with its own verification status. */
+  background: Fact[];
+}
+
 export interface EntryRef {
   collection: CollectionKey;
   slug: string;
@@ -72,4 +136,10 @@ export interface ContentEntry {
    * and linked internally, but carries noindex and stays out of the sitemap.
    */
   noindex?: boolean;
+  /** Required for vehicles. */
+  vehicle?: VehicleDetails;
+  /** Required for guides. */
+  guide?: GuideDetails;
+  /** Required for characters. */
+  character?: CharacterDetails;
 }

@@ -1,23 +1,28 @@
 # Roadmap
 
-## Foundation (this step)
+## Foundation
 - [x] Design system, content model, verification statuses, SEO helpers
-- [x] Four public sections: Map Guide, Vehicles, Cheat Codes, Characters
-- [x] Homepage + navigation featuring only those four
 - [x] About, Contact, Privacy, Terms, Disclaimer, custom 404, sitemap, robots
 - [x] Tests for content rules, indexing and redirects
 
 ## Interactive map
 - [x] Leaflet map with zoom/drag, multi-select category filters, regions, search, popups, details panel, placeholder data
 
+## Core features (prompt 3)
+- [ ] Vehicles: official records, categories (cars/motorcycles/boats/aircraft/other), search, filters, sorting, detail pages
+- [ ] "Where to Find" page per vehicle (spawns, directions, spawn type, rarity, screenshots, pre-release message, map hand-off)
+- [ ] Characters hub + individual profile pages with official biographies
+- [ ] Guides section (Cheats, Weapons, Gameplay, Beginner, Vehicles, Tips) with guide pages; Coming Soon where unavailable
+- [ ] Global search (vehicles, characters, guides, map locations)
+- [ ] Map page: Coming Soon until the authentic map image; explorer + vehicle filter ready
+- [ ] Navigation, homepage, loading/empty states, SEO, tests
+
 ## Waiting on the user
-- Authentic GTA VI map image (with permission) + its exact pixel size
-- Real, verified map locations and photos
+- Authentic GTA VI map image (with permission) + verified map locations
+- Photos for vehicles, characters, guides (user supplies; no generated images)
 - Public domain (sitemap + absolute canonical URLs)
 - Contact email
-- Photos (user supplies; no generated images)
 
-## Later (separate prompts)
-- Homepage design pass, vehicles database, cheat codes, admin/editor dashboard
-- Map: trace real region outlines and enter verified locations once the authentic image arrives
-- Re-launch hidden sections: missions, weapons, collectibles, locations, guides, news
+## Later
+- Admin/editor dashboard
+- Re-launch hidden sections: missions, weapons, collectibles, locations, news
